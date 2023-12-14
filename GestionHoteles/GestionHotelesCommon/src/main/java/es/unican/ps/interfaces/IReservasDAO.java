@@ -9,9 +9,10 @@ import es.unican.ps.model.DatosPago;
 import es.unican.ps.model.Hotel;
 import es.unican.ps.model.Reserva;
 import es.unican.ps.model.TipoHabitacion;
+import jakarta.ejb.Local;
 import es.unican.ps.model.ReservaTipoHabitacion;
 
-
+@Local
 public interface IReservasDAO {
 	
 	public Reserva creaReserva(Reserva reserva);

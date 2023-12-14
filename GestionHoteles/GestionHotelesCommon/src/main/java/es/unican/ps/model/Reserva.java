@@ -1,25 +1,39 @@
 package es.unican.ps.model;
 
+import java.io.Serializable;
 import java.util.Date;  
 import java.util.Map;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.util.HashMap;
 
-public class Reserva {
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "Reservas")
+public class Reserva implements Serializable {
 	
+	@Id
 	private long id;
+	
 	private Date fechaDeEntrada;
 	private Date fechaSalida;
 	private double importe;
 	private Hotel hotel;
 	private Map<TipoHabitacion, Integer> habitacionesReservadas;
-	private final DatosCliente cliente;
+	private DatosCliente cliente;
 	
-	public Reserva(long id, Date fechaDeEntrada, Date fechaSalida, Hotel hotel, DatosCliente cliente) {
+	public Reserva() {
+		
+	}
+	
+	public Reserva(Date fechaDeEntrada, Date fechaSalida, Hotel hotel,double importe, DatosCliente cliente) {
 		this.hotel = hotel;
-		this.id = id;
 		this.fechaDeEntrada = fechaDeEntrada;
 		this.fechaSalida = fechaSalida;
-		this.importe = 0;
+		this.importe = importe;
 		this.habitacionesReservadas = new HashMap<TipoHabitacion, Integer>();
 		this.cliente = cliente;
 	}

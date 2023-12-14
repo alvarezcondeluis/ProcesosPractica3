@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import es.unican.ps.DAO.impl.HotelesDAO;
 import es.unican.ps.DAO.impl.ReservasDAO;
 import es.unican.ps.interfaces.IGestionReservas;
@@ -63,28 +66,16 @@ public class GestionReservas implements IGestionReservas {
 		return habitacionesDisponibles;
 	}
 	
-	/**
-	 * Calcula el precio por noche de las habitaciones introducidas en un mapa
-	 * @param habitaciones Mapa asocia el tipo de habitacion con el numero de habitaciones de ese tipo
-	 * @return El importe del conjunto de habitaciones introducido por noche
-	 */
-	public double calculaImportePorNoche (Map<TipoHabitacion, Integer> habitaciones) {
-		double importe = 0;
-		for (TipoHabitacion t: habitaciones.keySet()) {
-			importe += t.getPrecioPorNoche()* habitaciones.get(t);
-		}
-		return importe;
-	}
+	
 
-	public long reservar(Map<TipoHabitacion, Integer> habitacionesAReservar, DatosCliente cliente, Date fechaIni, Date fechaFin,
+	public Reserva reservar(Map<TipoHabitacion, Integer> habitacionesAReservar, DatosCliente cliente, Date fechaIni, Date fechaFin,
 			DatosPago tarjeta, Hotel hotel) throws Exception {
-		// Comprobación de que las habitaciones introducidas siguen disponibles
+		// Calculo el importe de la reserva
 		
-		if (compruebaPuedeReservar(habitacionesAReservar, fechaIni, fechaFin, hotel)) {
-			
-		}
+		double importe = this.calculaImporte(habitacionesAReservar, fechaIni, fechaFin);
 		
 		
+		Reserva reserva = new Reserva(fechaIni, fechaFin, hotel,importe, cliente);
 		
 		
 		return 0;
@@ -136,16 +127,40 @@ public class GestionReservas implements IGestionReservas {
 		return reservasHotel;
 	}
 	
-	private int numHabitaciones(TipoHabitacion t, Set<ReservaTipoHabitacion> habitaciones) {
-		int numero = 0;
-		for (ReservaTipoHabitacion h : habitaciones) {
-			if (h.getTipoHabitacion().equals(t)) {
-				numero += h.getNumHabitaciones();
-			}
+	
+	/**
+	 * Metodo que devuelve el numero de dias que hay entre dos fechar
+	 * @param fechaInicio Primera fecha
+	 * @param fechaFin Segunda fecha
+	 * @return Dias que han pasado entre estas fechas
+	 */
+	private long calcularDiasEntreFechas(Date fechaInicio, Date fechaFin) {
+        Calendar calIni = Calendar.getInstance();
+        calIni.setTime(fechaInicio);
+
+        Calendar calFin = Calendar.getInstance();
+        calFin.setTime(fechaFin);
+
+        long diffEnMilis = calFin.getTimeInMillis() - calIni.getTimeInMillis();
+        return TimeUnit.DAYS.convert(diffEnMilis, TimeUnit.MILLISECONDS);
+    }
+	
+	/**
+	 * Calcula el precio durante las fechas indicadas de las habitaciones introducidas en un mapa
+	 * @param habitaciones Mapa asocia el tipo de habitacion con el numero de habitaciones de ese tipo
+	 * @param fechaIni Fecha a partir de la cual se reservan las habitaciones
+	 * @param fechaFin Fecha hasta la que se reservan las habitaciones
+	 * @return El importe del conjunto de habitaciones introducido por noche
+	 */
+	private double calculaImporte(Map<TipoHabitacion, Integer> habitaciones, Date fechaIni, Date fechaFin) {
+		double importe = 0;
+		for (TipoHabitacion t: habitaciones.keySet()) {
+			importe += t.getPrecioPorNoche()* habitaciones.get(t);
 		}
-		return numero;
+		long dias = this.calcularDiasEntreFechas(fechaIni, fechaFin);
+		
+		// Devuelvo el importe por noche por el numero de noches que son los dias -1
+		return importe * (dias -1);
 	}
-	
-	
 
 }

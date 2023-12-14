@@ -10,10 +10,11 @@ import es.unican.ps.model.DatosPago;
 import es.unican.ps.model.Hotel;
 import es.unican.ps.model.Reserva;
 import es.unican.ps.model.TipoHabitacion;
+import jakarta.ejb.Local;
 import jakarta.ejb.Remote;
 
 
-@Remote
+@Local
 public interface IGestionReservas {
 	
 	public Map<TipoHabitacion, Integer> consultaDisponibilidad(Date fechaIni, Date fechaFin, Hotel hotel);
