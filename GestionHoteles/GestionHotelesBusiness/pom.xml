@@ -6,4 +6,18 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>GestionHotelesBusiness</artifactId>
+  
+ 
+  <dependencies>
+  	<dependency>
+  		<groupId>es.unican.ps</groupId>
+  		<artifactId>GestionHotelesCommon</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>es.unican.ps</groupId>
+  		<artifactId>GestionHotelesDAO</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

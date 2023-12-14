@@ -23,5 +23,6 @@
   <modules>
   	<module>GestionHotelesBusiness</module>
   	<module>GestionHotelesCommon</module>
+  	<module>GestionHotelesDAO</module>
   </modules>
 </project>

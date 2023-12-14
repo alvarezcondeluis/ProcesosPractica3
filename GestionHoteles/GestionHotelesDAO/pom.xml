@@ -5,15 +5,12 @@
     <artifactId>GestionHoteles</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  
-  <artifactId>GestionHotelesCommon</artifactId>
-  
+  <artifactId>GestionHotelesDAO</artifactId>
   <dependencies>
-	  <dependency>
-        	<groupId>org.projectlombok</groupId>
-        	<artifactId>lombok</artifactId>
-        	<version>1.18.22</version> <!-- Verifica la última versión en https://search.maven.org/artifact/org.projectlombok/lombok -->
-        	<scope>provided</scope>
-    	</dependency>
+  	<dependency>
+  		<groupId>es.unican.ps</groupId>
+  		<artifactId>GestionHotelesCommon</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
   </dependencies>
 </project>

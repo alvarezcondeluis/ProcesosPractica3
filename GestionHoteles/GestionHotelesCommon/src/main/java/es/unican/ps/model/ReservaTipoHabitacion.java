@@ -1,22 +1,35 @@
 package es.unican.ps.model;
-import lombok.Getter;
-import lombok.Setter;
 
-
-
-@Getter
 public class ReservaTipoHabitacion {
 	
-	@Getter
-	private long idReserva;
-	private long idTipoHabitacion;
+	
+	private final Reserva reserva;
+	private final TipoHabitacion tipoHabitacion;
 	private int numHabitaciones;
-	private Hotel hote;
-	public ReservaTipoHabitacion(long idReserva, long idTipoHabitaciones, int numHabitaciones) {
-		this.idReserva = idReserva;
-		this.idTipoHabitacion = idTipoHabitaciones;
+	
+	
+	public ReservaTipoHabitacion(Reserva reserva, TipoHabitacion tipoHabitacion, int numHabitaciones) {
+		this.tipoHabitacion = tipoHabitacion;
+		this.reserva = reserva;
 		this.numHabitaciones = numHabitaciones;
-		hote.
+		
+	}	
+
+	public int getNumHabitaciones() {
+		return numHabitaciones;
 	}
+
+	public void setNumHabitaciones(int numHabitaciones) {
+		this.numHabitaciones = numHabitaciones;
+	}
+
+	public Reserva getReserva() {
+		return reserva;
+	}
+
+	public TipoHabitacion getTipoHabitacion() {
+		return tipoHabitacion;
+	}
+	
 	
 }

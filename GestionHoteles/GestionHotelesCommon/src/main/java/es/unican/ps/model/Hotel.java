@@ -1,17 +1,12 @@
 package es.unican.ps.model;
 
+import java.util.List; 
 
-import java.util.List;
 
-import lombok.*;
-
-@Getter
 public class Hotel {
 	
 	
 	private long idHotel;
-	
-
 	private String nombre;
 	private final String direccion;
 	private final String localidad;
@@ -24,35 +19,46 @@ public class Hotel {
 		this.direccion = direccion;
 		this.localidad = localidad;
 	}
-	
-	
+
 
 	public long getIdHotel() {
 		return idHotel;
-	}	
+	}
+
+
+	public void setIdHotel(long idHotel) {
+		this.idHotel = idHotel;
+	}
+
 
 	public String getNombre() {
 		return nombre;
 	}
 
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 
 	public List<TipoHabitacion> getHabitaciones() {
 		return habitaciones;
 	}
 
+
 	public void setHabitaciones(List<TipoHabitacion> habitaciones) {
 		this.habitaciones = habitaciones;
 	}
+
 
 	public String getDireccion() {
 		return direccion;
 	}
 
+
 	public String getLocalidad() {
 		return localidad;
 	}
+	
 	
 }
